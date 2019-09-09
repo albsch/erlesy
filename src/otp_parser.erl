@@ -21,10 +21,10 @@
 %%% API
 %%%===================================================================
 start_link() ->
-    gen_server:start_link({local, ?SERVER}, ?MODULE, [], []).
+  gen_server:start_link({local, ?SERVER}, ?MODULE, [], []).
 
-create_graph(FileName, IncludePaths, Mode)->
-    gen_server:cast(?MODULE, {create, FileName, IncludePaths, Mode}).
+create_graph(FileName, IncludePaths, Mode) ->
+  gen_server:call(?MODULE, {create, FileName, IncludePaths, Mode}, infinity).
 
 %%%===================================================================
 %%% gen_server callbacks
@@ -32,16 +32,17 @@ create_graph(FileName, IncludePaths, Mode)->
 init([]) ->
   {ok, #state{}}.
 
-handle_call(_Request, _From, State) ->
-  Reply = ok,
-  {reply, Reply, State}.
+handle_cast(_Request, State) ->
+  {noreply, State}.
 
-handle_cast({create, FileName, IncludePaths, dot}, State) ->
-    {ok, File} = file:open(filename:rootname(FileName) ++ ".gv", [write]),
-    {parsed, _, Digraph} = graph_builder:parse_file(FileName, IncludePaths),
-    file:write(File, dot:digraph_to_dot(filename:rootname(FileName), Digraph)), 
-    file:close(File),
-    {noreply, State}.
+handle_call({create, FileName, IncludePaths, dot}, _From, State) ->
+  TargetFile = filename:rootname(FileName) ++ ".gv",
+  io:format("Writing to ~p~n", [TargetFile]),
+  {ok, File} = file:open(TargetFile, [write]),
+  {parsed, _, Digraph} = graph_builder:parse_file(FileName, IncludePaths),
+  file:write(File, dot:digraph_to_dot(filename:rootname(FileName), Digraph)),
+  file:close(File),
+  {reply, ok, State}.
 
 handle_info(_Info, State) ->
   {noreply, State}.

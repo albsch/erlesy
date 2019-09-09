@@ -14,16 +14,24 @@ ErlEsy is a simple graphing tool for Erlang. It allows for automatic generation 
 
 ErlEsy can be build by rebar3
 
-`rebar3 get-deps`
-`rebar3 compile`
+    rebar3 escriptize
 
 ### make
 
 You can also use the makefile, with these directives:
-`make compile` - fetches deps and compiles erlesy
-`make shell` - starts a erlesy shell
 
-## Running 
+- `make compile` - fetches deps and compiles erlesy
+- `make shell` - starts an erlesy shell
+- `make escriptize` - compiles to escript
+
+## Running
+
+    _build/default/bin/erlesy ErlFile IncludeFiles*
+
+`ErlFile` should be a path to the .erl file you want to graph.
+`IncludeFiles*` is a list of paths towards include files.
+
+## Running from Shell
 
 To run ErlEsy open a shell with
 
@@ -31,8 +39,8 @@ To run ErlEsy open a shell with
 
 Then you can create any file by using
 
-`-spec create_graph(string(), [string()], dot) -> ok.`
-`otp_parser:create_graph(FileName, IncludeFiles, Mode).`
+    -spec create_graph(string(), [string()], dot) -> ok.
+    otp_parser:create_graph(FileName, IncludeFiles, Mode).
 
 * FileName should be a path to the .erl file you want to graph
 * IncludeFiles is a list of paths towards include files

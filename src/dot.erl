@@ -12,7 +12,7 @@ digraph_to_dot(Name, G) ->
     %% @TODO make these dynamic based on the diagraph data to beautify the display
     "  rankdir=LR;\n" ++
     "  edge [fontsize=10];\n" ++
-    "  node [shape=circle];\n" ++
+    "  node [];\n" ++
     "  ranksep = 2;\n" ++
     "  nodesep = 0.5\n" ++
     edges_to_dot(G, digraph:edges(G)) ++

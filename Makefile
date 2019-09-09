@@ -14,3 +14,6 @@ test:
 
 shell:
 	erl -sname erlesy -setcookie erlesy -pa _build/default/lib/erlesy/ebin -pa _build/default/lib/jsx/ebin -s otp_parser_app
+
+escript:
+	rebar3 escriptize
