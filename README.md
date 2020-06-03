@@ -4,8 +4,7 @@ ErlEsy is a simple graphing tool for Erlang. It allows for automatic generation 
 
 ## Dependencies
 
-* `OTP 19`
-* `rebar3` accessible via path
+* `OTP 19+`
 
 ## Building
 

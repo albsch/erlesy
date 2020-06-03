@@ -3,17 +3,14 @@
 -behaviour(application).
 
 %% Application callbacks
--export([start/0,
-         start/2,
-         stop/1]).
+-export([start/0, start/2, stop/1]).
 
 %%%===================================================================
 %%% Application callbacks
 %%%===================================================================
 
 start() ->
-    application:start(jsx),
-    application:start(erlesy).
+    application:start(jsx), application:start(erlesy).
 
 %%--------------------------------------------------------------------
 %% @private
@@ -32,12 +29,10 @@ start() ->
 %% @end
 %%--------------------------------------------------------------------
 start(_StartType, _StartArgs) ->
-  case otp_parser_sup:start_link() of
-    {ok, Pid} ->
-      {ok, Pid};
-    Error ->
-      Error
-  end.
+    case otp_parser_sup:start_link() of
+      {ok, Pid} -> {ok, Pid};
+      Error -> Error
+    end.
 
 %%--------------------------------------------------------------------
 %% @private
@@ -49,8 +44,7 @@ start(_StartType, _StartArgs) ->
 %% @spec stop(State) -> void()
 %% @end
 %%--------------------------------------------------------------------
-stop(_State) ->
-  ok.
+stop(_State) -> ok.
 
 %%%===================================================================
 %%% Internal functions

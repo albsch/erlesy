@@ -22,10 +22,10 @@
 %% @end
 %%--------------------------------------------------------------------
 start_link() ->
-  supervisor:start_link({local, ?SERVER}, ?MODULE, []).
-%%%===================================================================
-%%% Supervisor callbacks
-%%%===================================================================
+    supervisor:start_link({local, ?SERVER}, ?MODULE,
+			  []).%%%===================================================================
+			      %%% Supervisor callbacks
+			      %%%===================================================================
 
 %%--------------------------------------------------------------------
 %% @private
@@ -41,19 +41,20 @@ start_link() ->
 %% @end
 %%--------------------------------------------------------------------
 init([]) ->
-  RestartStrategy = one_for_one,
-  MaxRestarts = 1000,
-  MaxSecondsBetweenRestarts = 3600,
-  SupFlags = {RestartStrategy, MaxRestarts, MaxSecondsBetweenRestarts},
-
-  ParseServer = {server, {otp_parser, start_link, []},
-                 permanent, 2000, worker, [otp_parser]},
-  GraphBuilder = {builder, {graph_builder, start_link, []},
-                  permanent, 2000, worker, [graph_builder, dot]},
-  FileServer = {fs, {erlesy_fs, start_link, []},
-                permanent, 2000, worker, [erlesy_fs]},
-
-  {ok, {SupFlags, [ParseServer, GraphBuilder, FileServer]}}.
+    RestartStrategy = one_for_one,
+    MaxRestarts = 1000,
+    MaxSecondsBetweenRestarts = 3600,
+    SupFlags = {RestartStrategy, MaxRestarts,
+		MaxSecondsBetweenRestarts},
+    ParseServer = {server, {otp_parser, start_link, []},
+		   permanent, 2000, worker, [otp_parser]},
+    GraphBuilder = {builder,
+		    {graph_builder, start_link, []}, permanent, 2000,
+		    worker, [graph_builder, dot]},
+    FileServer = {fs, {erlesy_fs, start_link, []},
+		  permanent, 2000, worker, [erlesy_fs]},
+    {ok,
+     {SupFlags, [ParseServer, GraphBuilder, FileServer]}}.
 
 %%%===================================================================
 %%% Internal functions
