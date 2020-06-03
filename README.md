@@ -1,10 +1,16 @@
 # erlesy
 
+
+![Language](https://img.shields.io/badge/language-erlang-blue.svg)
+![Release](https://img.shields.io/badge/release-R21+-9cf.svg)
+![Formatter](https://img.shields.io/badge/formatter-erlang_otp-33d.svg)
+![Build](https://img.shields.io/badge/build-rebar3%203.13.1-brightgreen.svg)
+
+[![Build Status](https://api.travis-ci.org/albsch/erlesy.svg?branch=master)](https://api.travis-ci.org/albsch/erlesy.svg?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/albsch/erlesy/badge.svg?branch=master)](https://coveralls.io/github/albsch/erlesy?branch=master)
+
 ErlEsy is a simple graphing tool for Erlang. It allows for automatic generation of state machine diagrams out of Erlang source files. It works by parsing an .erl source file and building a digraph out of it. The digraph can be then transformed into any format that will allow for its graphical representation.
 
-## Dependencies
-
-* `OTP 19+`
 
 ## Building
 
